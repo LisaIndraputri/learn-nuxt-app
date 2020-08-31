@@ -1,12 +1,10 @@
 <template>
-  <div>
-    <h3>Please enter id and click</h3>
-  </div>
+  <div>an Error :(</div>
 </template>
 
 <script>
 export default {
-  layout: 'users'
+
 }
 </script>
 
