@@ -22,17 +22,19 @@ export default {
 <style scoped>
 .button {
   font: inherit;
-  background-color: black;
+  background-color: orange;
   color: white;
-  padding: 5px;
+  padding: 10px;
   cursor: pointer;
-  border: 1px solid black;
+  border: 1px solid orange;
+  border-radius: 4px;
+  min-width: 88px;
 }
 
 .button:hover,
 .button:active {
-  background-color: rgb(51, 51, 51);
-  border: 1px solid black;
+  background-color:bisque;
+  border: 1px solid bisque;
 }
 
 .inverted {

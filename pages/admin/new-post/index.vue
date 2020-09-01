@@ -55,5 +55,7 @@ export default {
 </script>
 
 <style>
-
+.wrapper-new-post {
+  padding: 50px;
+}
 </style>
