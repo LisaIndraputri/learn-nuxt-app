@@ -1,73 +1,79 @@
 <template>
-  <div class="container">
-    <div>
-      <Logo />
-      <h1 class="title">
-        learn-nuxt-app
-      </h1>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--grey"
-        >
-          GitHub
-        </a>
+  <div class="wrapper-landing-page">
+    <section class="intro">
+      <div class="landing-page-title">Get the latest updates!</div>
+    </section>
+    <section class="featured-posts">
+      <div class="featured-post-list" v-for="(data, index) in listPreview" :key="index">
+        <postPreview :id="index+1" :data="data"/>
       </div>
-    </div>
+    </section>
   </div>
 </template>
 
 <script>
-export default {}
+import postPreview from '@/components/posts/postPreview'
+export default {
+  components: {
+    postPreview,
+  },
+  computed: {
+    listPreview () {
+      return [{
+          title: 'try with id 1',
+          description: 'this is the desc id 1',
+          url: 'https://i2.wp.com/files.123freevectors.com/wp-content/original/131565-pastel-pink-polygon-abstract-background.jpg?w=800&q=95'
+        }, {
+          title: 'try with id 2',
+          description: 'this is the desc id 2',
+          url: 'https://i2.wp.com/files.123freevectors.com/wp-content/original/131565-pastel-pink-polygon-abstract-background.jpg?w=800&q=95'
+        },
+      ]
+    }
+  }
+}
 </script>
 
 <style>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
+.intro {
+  height: 300px;
+  padding: 30px;
+  box-sizing: border-box;
+  background-position: center;
+  background-image: url('~assets/images/background-main-page.jpg');
+  background-size: cover;
+}
+.intro .landing-page-title {
+  position: absolute;
+  top: 10%;
+  left: 5%;
+  width: 90%;
+  font-size: 1.5rem;
+  color: black;
+  background-color: rgb(211, 211, 211);
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 3px 3px 3px black;
+  box-sizing: border-box;
+  border: 1px solid black;
+}
+@media (min-width: 768px) {
+  .intro .landing-page-title {
+    font-size: 2rem;
+  }
+}
+.featured-posts {
   display: flex;
-  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+  flex-wrap: wrap;
   align-items: center;
-  text-align: center;
+  justify-content: center;
+}
+.featured-post-list {
+  display: inherit;
 }
 
-.title {
-  font-family:
-    'Quicksand',
-    'Source Sans Pro',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
 
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
 
-.links {
-  padding-top: 15px;
-}
 </style>
