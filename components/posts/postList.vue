@@ -1,7 +1,7 @@
 <template>
   <section class="featured-posts">
     <div class="featured-post-list" v-for="(data, index) in listPreview" :key="index">
-      <postPreview :id="index+1" :data="data"/>
+      <postPreview :id="index+1" :data="data" :isAdmin="isAdmin"/>
     </div>
   </section>
 </template>
@@ -11,6 +11,12 @@ import postPreview from '@/components/posts/postPreview'
 export default {
   components: {
     postPreview,
+  },
+  props: {
+    isAdmin: {
+      type: Boolean,
+      default: false
+    }
   },
   computed: {
     listPreview () {
