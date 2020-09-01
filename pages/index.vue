@@ -3,7 +3,9 @@
     <section class="intro">
       <div class="landing-page-title">Get the latest updates!</div>
     </section>
-    <postList />
+    <div class="list-posts">
+      <postList />
+    </div>
   </div>
 </template>
 
@@ -17,6 +19,9 @@ export default {
 </script>
 
 <style>
+.list-posts {
+  padding: 0 50px;
+}
 .intro {
   height: 300px;
   padding: 30px;
@@ -24,6 +29,7 @@ export default {
   background-position: center;
   background-image: url('~assets/images/background-main-page.jpg');
   background-size: cover;
+  padding: 0 50px;
 }
 .intro .landing-page-title {
   position: absolute;
