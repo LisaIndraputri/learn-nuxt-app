@@ -25,7 +25,6 @@ export default {
   },
   computed: {
     getLink () {
-      console.log(this.data);
       return `/posts/${this.id}`
     },
     getUrl () {
