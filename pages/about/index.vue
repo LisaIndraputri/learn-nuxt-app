@@ -16,6 +16,6 @@ export default {
 <style>
   .about-wrapper {
     text-align: center;
-    padding: 30px;
+    padding: 50px;
   }
 </style>

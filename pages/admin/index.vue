@@ -26,7 +26,7 @@ export default {
 
 <style>
 .wrapper-admin {
-  padding: 20px;
+  padding: 50px;
 }
 .new-post {
   text-align: center;
