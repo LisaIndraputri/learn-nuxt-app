@@ -22,10 +22,14 @@ export default {
       type: Object,
       default: () => {}
     },
+    isAdmin: {
+      type: Boolean,
+      default: false
+    }
   },
   computed: {
     getLink () {
-      return `/posts/${this.id}`
+      return this.isAdmin ? `/admin/${this.id}` : `/posts/${this.id}`
     },
     getUrl () {
       const url = this.data.url || 'https://files.123fr`eevectors.com/wp-content/original/131824-white-and-gold-polygon-background-graphic-design.jpg'
