@@ -24,6 +24,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: bisque;
   }
   .nav-items {
     list-style: none;
@@ -33,5 +34,15 @@ export default {
     justify-content: space-around;
     align-items: center;
     width: 80%;
+    color: white;
+  }
+  .nav-items a {
+    color: gray;
+    text-decoration: none;
+  }
+  .nav-items a:hover,
+  .nav-items a:active {
+    color: black;
+    text-decoration: none;
   }
 </style>
