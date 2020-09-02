@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper-admin">
     <section class="new-post">
-      <AppButton type="button" @click="goToCreatePost">Create a post</AppButton>
+      <SuperButton type="button" @click="goToCreatePost">Create a post</SuperButton>
     </section>
     <section class="existing-post">
       <h1>Existing posts</h1>
@@ -12,11 +12,11 @@
 
 <script>
 import postList from '@/components/posts/postList'
-import AppButton from '@/components/uiComp/AppButton'
+import SuperButton from '@/components/uiComp/Button'
 export default {
   components: {
     postList,
-    AppButton
+    SuperButton
   },
   data () {
     return {

@@ -1,32 +1,32 @@
 <template>
   <section class="new-post-form">
     <form @submit.prevent="onSave">
-      <AppControlInput v-model="editedPost.author">Author Name</AppControlInput>
-      <AppControlInput v-model="editedPost.title">Title</AppControlInput>
-      <AppControlInput v-model="editedPost.thumbnailLink">Thumbnail Link</AppControlInput>
-      <AppControlInput
+      <InputForm v-model="editedPost.author">Author Name</InputForm>
+      <InputForm v-model="editedPost.title">Title</InputForm>
+      <InputForm v-model="editedPost.thumbnailLink">Thumbnail Link</InputForm>
+      <InputForm
         control-type="textarea"
         v-model="editedPost.content">
         Content
-      </AppControlInput>
-      <AppButton type="submit">Save</AppButton>
-      <AppButton
+      </InputForm>
+      <SuperButton type="submit">Save</SuperButton>
+      <SuperButton
         type="button"
         style="margin-left: 10px"
         btn-style="cancel"
         @click="onCancel">Cancel
-      </AppButton>
+      </SuperButton>
     </form>
   </section>
 </template>
 
 <script>
-import AppControlInput from '@/components/uiComp/AppControlInput'
-import AppButton from '@/components/uiComp/AppButton'
+import InputForm from '@/components/uiComp/Input'
+import SuperButton from '@/components/uiComp/Button'
 export default {
   components: {
-    AppButton,
-    AppControlInput,
+    SuperButton,
+    InputForm,
   },
   props: {
     data: {
