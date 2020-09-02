@@ -7,6 +7,7 @@
 <script>
 import postForm from '@/components/admin/postForm'
 export default {
+  layout: 'admin',
   components: {
     postForm,
   },
