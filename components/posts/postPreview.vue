@@ -4,7 +4,7 @@
       <div class="post-thumbnail" :style="getUrl"></div>
       <div class="post-content">
         <h1> {{data.title}} </h1>
-        <p> {{ data.description }}</p>
+        <p> {{ data.previewText }}</p>
       </div>
     </article>
   </nuxt-link>
@@ -28,7 +28,7 @@ export default {
       return this.isAdmin ? `/admin/${this.data.id}` : `/posts/${this.data.id}`
     },
     getUrl () {
-      const url = this.data.url || 'https://files.123fr`eevectors.com/wp-content/original/131824-white-and-gold-polygon-background-graphic-design.jpg'
+      const url = this.data.thumbnail || 'https://files.123fr`eevectors.com/wp-content/original/131824-white-and-gold-polygon-background-graphic-design.jpg'
       return `background-image: url(${url})`
     }
   }
