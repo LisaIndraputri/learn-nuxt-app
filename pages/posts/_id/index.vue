@@ -15,28 +15,17 @@
 </template>
 
 <script>
+import axios from 'axios'
+import { POST_ID_URL } from '@/constants/db'
 export default {
   asyncData(context) {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve({
-          data: {
-            id: '1',
-            title: `try with id ${context.route.params.id}`,
-            description: 'this is the desc id 1',
-            content: 'abcd efgh ijkl',
-            url: 'https://i2.wp.com/files.123freevectors.com/wp-content/original/131565-pastel-pink-polygon-abstract-background.jpg?w=800&q=95',
-            author: 'lala',
-            updatedDate: new Date(),
-  
-          }
-        })
-      }, 1000)
+    return axios.get(`${POST_ID_URL}${context.params.id}.json`).then(res => {
+      return {
+        data: res.data
+      }
+    }).catch((e) => {
+      context.error(e)
     })
-      .then(data => {
-        return data
-      })
-      .catch((e) => {context.error(new Error())})
   },
 }
 </script>
