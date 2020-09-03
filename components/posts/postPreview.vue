@@ -14,10 +14,6 @@
 export default {
   name: 'PostPreview', 
   props: {
-    id: {
-      type: Number,
-      required: true
-    },
     data: {
       type: Object,
       default: () => {}
@@ -29,7 +25,7 @@ export default {
   },
   computed: {
     getLink () {
-      return this.isAdmin ? `/admin/${this.id}` : `/posts/${this.id}`
+      return this.isAdmin ? `/admin/${this.data.id}` : `/posts/${this.data.id}`
     },
     getUrl () {
       const url = this.data.url || 'https://files.123fr`eevectors.com/wp-content/original/131824-white-and-gold-polygon-background-graphic-design.jpg'
