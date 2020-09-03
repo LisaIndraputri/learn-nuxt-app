@@ -1,4 +1,7 @@
 import Vuex from 'vuex'
+import axios from 'axios'
+
+import { POST_URL, POST_ID_URL } from '@/constants/db'
 
 const createStore = () => {
   return new Vuex.Store({
@@ -6,32 +9,50 @@ const createStore = () => {
       loadedPosts: []
     },
     mutations: {
-      setPosts(state, posts) {
+      setPosts (state, posts) {
         state.loadedPosts = posts
+      },
+      addPost (state, post) {
+        state.loadedPosts.push(post)
+      },
+      editPost (state, editedPost) {
+        const postIndex = state.loadedPosts.findIndex(post => post.id === editedPost.id)
+        state.loadedPosts[postIndex] = editedPost
       }
     },
     actions: {
-      nuxtServerInit(vuexContext, context) {
-        return new Promise ((resolve,reject) => {
-          setTimeout(() => {
-            vuexContext.commit('setPosts', [
-              {
-                id: '1',
-                title: 'try with id 1-1',
-                description: 'this is the desc id 1',
-                url: 'https://i2.wp.com/files.123freevectors.com/wp-content/original/131565-pastel-pink-polygon-abstract-background.jpg?w=800&q=95'
-              }, {
-                id: '2',
-                title: 'try with id 1-2',
-                description: 'this is the desc id 2',
-                url: 'https://i2.wp.com/files.123freevectors.com/wp-content/original/131565-pastel-pink-polygon-abstract-background.jpg?w=800&q=95'
-              },
-            ])
-            resolve()
-          }, 1000)
+      nuxtServerInit (vuexContext, context) {
+        return axios.get(POST_URL).then(res => {
+          const postArray = []
+          for (const key in res.data) {
+            postArray.push({ ...res.data[key], id: key })
+          }
+          vuexContext.commit('setPosts', postArray)
+        }).catch(e => {
+          context.error(e)
         })
       },
-      setPosts(vuexContext, posts) {
+      addPost (vuexContext, post) {
+        const data = {
+          ...post,
+          updatedDate: new Date()
+        }
+        return axios.post(POST_URL, data).then(res => {
+          console.log(res, 'ini res')
+          vuexContext.commit('addPost', { ...data, id: res.data.name})
+        }).catch(e => {
+          console.log(e)
+        })
+      },
+      editPost (vuexContext, post) {
+        return axios.put(`${POST_ID_URL}${post.id}.json`, post).then(res => {
+          console.log(res)
+          vuexContext.commit('editPost', post)
+        }).catch(e => {
+          console.log(e)
+        })
+      },
+      setPosts (vuexContext, posts) {
         vuexContext.commit('setPosts', posts)
       }
     },
