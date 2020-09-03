@@ -16,20 +16,11 @@ export default {
     isAdmin: {
       type: Boolean,
       default: false
-    }
+    },
   },
   computed: {
     listPreview () {
-      return [{
-          title: 'try with id 1',
-          description: 'this is the desc id 1',
-          url: 'https://i2.wp.com/files.123freevectors.com/wp-content/original/131565-pastel-pink-polygon-abstract-background.jpg?w=800&q=95'
-        }, {
-          title: 'try with id 2',
-          description: 'this is the desc id 2',
-          url: 'https://i2.wp.com/files.123freevectors.com/wp-content/original/131565-pastel-pink-polygon-abstract-background.jpg?w=800&q=95'
-        },
-      ]
+      return this.$store.getters.loadedPosts
     }
   }
 }
