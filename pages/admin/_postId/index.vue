@@ -1,24 +1,33 @@
 <template>
   <div class="wrapper-single-existing-post">
-    <postForm :data="loadedData"/>
+    <div>{{loadedData.id}}</div>
+    <postForm :data="loadedData" @submit="submit"/>
   </div>
 </template>
 
 <script>
 import postForm from '@/components/admin/postForm'
+import axios from 'axios'
+import { POST_ID_URL } from '@/constants/db'
 export default {
   layout: 'admin',
   components: {
     postForm,
   },
-  data () {
-    return {
-      loadedData: {
-        author: 'my Name',
-        title: 'post it',
-        thumbnailLink: 'this is link',
-        content: 'abcd efgh ijkl'
+  asyncData(context) {
+    return axios.get(`${POST_ID_URL}${context.params.postId}.json`).then(res => {
+      return {
+        loadedData: { ...res.data, id: context.params.postId }
       }
+    }).catch((e) => {
+      context.error(e)
+    })
+  },
+  methods: {
+    submit (editedPost) {
+      this.$store.dispatch('editPost', editedPost).then(() => {
+        this.$router.push('/admin')
+      })
     }
   }
 }
