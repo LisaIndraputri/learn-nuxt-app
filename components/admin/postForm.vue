@@ -3,11 +3,16 @@
     <form @submit.prevent="onSave">
       <InputForm v-model="editedPost.author">Author Name</InputForm>
       <InputForm v-model="editedPost.title">Title</InputForm>
-      <InputForm v-model="editedPost.thumbnailLink">Thumbnail Link</InputForm>
+      <InputForm v-model="editedPost.thumbnail">Thumbnail Link</InputForm>
       <InputForm
         control-type="textarea"
         v-model="editedPost.content">
         Content
+      </InputForm>
+      <InputForm
+        control-type="textarea"
+        v-model="editedPost.previewText">
+        Preview Text
       </InputForm>
       <SuperButton type="submit">Save</SuperButton>
       <SuperButton
@@ -39,15 +44,17 @@ export default {
       editedPost: this.data ? {...this.data} : {
         author: '',
         title: '',
-        thumbnailLink: '',
-        content: ''
+        thumbnail: '',
+        content: '',
+        previewText: ''
       }
     }
   },
   methods: {
     onSave () {
       // save wip
-      console.log(this.editedPost, 'save wip')
+      console.log(this.editedPost, 'edited post');
+      this.$emit('submit', this.editedPost)
     },
     onCancel () {
       console.log('cancel wip')
