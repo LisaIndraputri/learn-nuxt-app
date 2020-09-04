@@ -15,7 +15,7 @@ export default {
   ** See https://nuxtjs.org/api/configuration-head
   */
   head: {
-    title: process.env.npm_package_name || '',
+    title: 'LEARN NUXT APP' || process.env.npm_package_name,
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -26,16 +26,20 @@ export default {
       { rel: 'stylesheet', href: "https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap"}
     ]
   },
+  // loading: { color: '#e3e3e3', height: '4px', duration: 5000 },
   /*
   ** Global CSS
   */
   css: [
+    '~assets/styles/main.css'
   ],
   /*
   ** Plugins to load before mounting the App
   ** https://nuxtjs.org/guide/plugins
   */
   plugins: [
+    '~plugins/global-components.js',
+    '~plugins/date-filter.js'
   ],
   /*
   ** Auto import components
@@ -64,5 +68,9 @@ export default {
   ** See https://nuxtjs.org/api/configuration-build/
   */
   build: {
+  },
+  transition: {
+    name: 'fade',
+    mode: 'out-in'
   }
 }
