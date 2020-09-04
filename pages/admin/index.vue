@@ -11,15 +11,9 @@
 </template>
 
 <script>
-import postList from '@/components/posts/postList'
-import SuperButton from '@/components/uiComp/Button'
 
 export default {
   layout: 'admin',
-  components: {
-    postList,
-    SuperButton
-  },
   data () {
     return {
       isAdmin: true,

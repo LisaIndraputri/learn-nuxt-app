@@ -16,16 +16,10 @@
 </template>
 
 <script>
-import InputForm from '@/components/uiComp/Input'
-import SuperButton from '@/components/uiComp/Button'
 
 export default {
   name: 'AdminAuthPage',
   layout: 'admin',
-  components: {
-    InputForm,
-    SuperButton
-  },
   data() {
     return {
       isLogin: true

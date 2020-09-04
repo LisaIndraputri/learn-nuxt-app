@@ -3,7 +3,7 @@
     <section class="post">
       <h1 class="post-title">{{ data.title }}</h1>
       <div class="post-descriptions">
-        <div class="post-description">Last updates on {{ data.updatedDate }}</div>
+        <div class="post-description">Last updates on {{ data.updatedDate | date }}</div>
         <div class="post-description">written by{{ data.author }}</div>
       </div>
       <p>{{ data.content }}</p>
@@ -27,6 +27,9 @@ export default {
       context.error(e)
     })
   },
+  head: {
+    title: 'A BLOG'
+  }
 }
 </script>
 

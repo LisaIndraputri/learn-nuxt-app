@@ -5,11 +5,7 @@
 </template>
 
 <script>
-import postList from '@/components/posts/postList'
 export default {
-  components: {
-    postList,
-  }
 }
 </script>
 
