@@ -1,9 +1,9 @@
 <template>
   <div class="wrapper-auth">
     <div class="auth-form">
-      <form>
-        <InputForm type="email">E-Mail Address</InputForm>
-        <InputForm type="password">Password</InputForm>
+      <form @submit.prevent="onSubmit">
+        <InputForm type="email" v-model="email">E-Mail Address</InputForm>
+        <InputForm type="password" v-model="password">Password</InputForm>
         <SuperButton type="submit">{{ isLogin ? 'Login' : 'Sign Up' }}</SuperButton>
         <SuperButton
           type="button"
@@ -16,13 +16,29 @@
 </template>
 
 <script>
-
+import axios from 'axios'
+import { FIREBASE_API_KEY } from '@/constants/db'
 export default {
   name: 'AdminAuthPage',
   layout: 'admin',
   data() {
     return {
-      isLogin: true
+      isLogin: true,
+      email: '',
+      password: ''
+    }
+  },
+  methods: {
+    onSubmit() {
+      axios.post(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${FIREBASE_API_KEY}`, {
+        email: this.email,
+        password: this.password,
+        returnSecureToken: true
+      }).then(res => {
+        console.log(res, 'ini res submit')
+      }).catch(e => {
+        console.log(e)
+      })
     }
   }
 }
