@@ -11,6 +11,7 @@ import axios from 'axios'
 import { POST_ID_URL } from '@/constants/db'
 export default {
   layout: 'admin',
+  middleware: 'auth',
   components: {
     postForm,
   },
