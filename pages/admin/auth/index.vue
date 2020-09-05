@@ -30,14 +30,12 @@ export default {
   },
   methods: {
     onSubmit() {
-      axios.post(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${FIREBASE_API_KEY}`, {
+      this.$store.dispatch('authenticateUser', {
+        isLogin: this.isLogin,
         email: this.email,
-        password: this.password,
-        returnSecureToken: true
+        password: this.password
       }).then(res => {
-        console.log(res, 'ini res submit')
-      }).catch(e => {
-        console.log(e)
+        this.$router.push('/admin')
       })
     }
   }
