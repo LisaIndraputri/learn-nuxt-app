@@ -2,6 +2,7 @@
   <div class="wrapper-admin">
     <section class="new-post">
       <SuperButton type="button" @click="goToCreatePost">Create a post</SuperButton>
+      <SuperButton type="button" @click="doLogout">Log Out</SuperButton>
     </section>
     <section class="existing-post">
       <h1>Existing posts</h1>
@@ -23,6 +24,10 @@ export default {
   methods: {
     goToCreatePost () {
       this.$router.push('/admin/new-post')
+    },
+    doLogout () {
+      this.$store.dispatch('logout')
+      this.$router.push('/admin/auth')
     }
   }
 }
