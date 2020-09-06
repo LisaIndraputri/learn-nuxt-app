@@ -1,5 +1,6 @@
 import Vuex from 'vuex'
 import axios from 'axios'
+import Cookie from 'js-cookie'
 
 import { POST_URL, POST_ID_URL, FIREBASE_API_KEY } from '@/constants/db'
 
@@ -22,6 +23,9 @@ const createStore = () => {
       },
       setToken (state, token) {
         state.token = token
+      },
+      clearToken (state) {
+        state.token = null
       }
     },
     actions: {
@@ -72,9 +76,43 @@ const createStore = () => {
         }).then(res => {
           console.log(res, 'ini res submit')
           vuexContext.commit('setToken', res.data.idToken)
+          localStorage.setItem('token', res.data.idToken)
+          localStorage.setItem('tokenExpiration', new Date().getTime() + res.data.expiresIn * 1000)
+          Cookie.set('jwt', res.data.idToken)
+          Cookie.set('expirationDate', new Date().getTime() + res.data.expiresIn * 1000)
+          vuexContext.dispatch('setLogoutTimer', res.data.expiresIn * 1000)
         }).catch(e => {
           console.log(e)
         })
+      },
+      setLogoutTimer (vuexContext, duration) {
+        setTimeout(() => {
+          vuexContext.commit('clearToken')
+        }, duration)
+      },
+      initAuth (vuexContext, req) {
+        let token
+        let expirationDate
+        if (req) {
+          if (!req.headers.cookie) {
+            return 
+          }
+          const jwtCookie = req.headers.cookie.split(';').find(c => c.trim().startsWith('jwt='))
+          if (!jwtCookie) {
+            return
+          }
+          token = jwtCookie.split('=')[1]
+          expirationDate = req.headers.cookie.split(';').find(c => c.trim().startsWith('expirationDate=')).split('=')[1]
+        } else {
+          token = localStorage.getItem('token')
+          expirationDate = localStorage.getItem('tokenExpiration')
+  
+          if (new Date().getTime() > +expirationDate || !token) {
+            return 
+          }
+        }
+        vuexContext.dispatch('setLogoutTimer', expirationDate - new Date().getTime())
+        vuexContext.commit('setToken', token)
       }
     },
     getters: {
