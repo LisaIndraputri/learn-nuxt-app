@@ -10,7 +10,7 @@ import postForm from '@/components/admin/postForm'
 import { POST_URL } from '@/constants/db'
 export default {
   layout: 'admin',
-  middleware: 'auth',
+  middleware: ['check-auth', 'auth'],
   components: {
     postForm,
   },
